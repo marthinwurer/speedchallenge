@@ -87,7 +87,7 @@ class SpeedSplit(Dataset):
 
         # stack frames and speeds, then return them both
         speeds = np.asarray(speeds)
-        frames = np.stack(frames)
+        frames = np.concatenate(frames)
         frame_nums = np.asarray(frame_nums)
 
         return frames, speeds, frame_nums
