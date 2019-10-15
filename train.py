@@ -10,9 +10,10 @@ from network import SpeedNet
 def main():
     stacks = 4
     LEARNING_RATE = 0.001
-    train_set = get_selected_datasets([0,1,2,3], stacks=stacks)
+    BATCH_SIZE = 128
+    train_set = get_selected_datasets([0, 1, 2, 3], stacks=stacks)
     dataset_loader = torch.utils.data.DataLoader(train_set,
-                                                 batch_size=4, shuffle=True,
+                                                 batch_size=BATCH_SIZE, shuffle=True,
                                                  num_workers=4)
 
     net = SpeedNet(stacks=stacks)

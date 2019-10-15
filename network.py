@@ -14,7 +14,7 @@ class SpeedNet(nn.Module):
 
         in_size = stacks * 3
 
-        self.layers = [
+        self.layers = nn.ModuleList([
             nn.Conv2d(in_size, 16, 3, padding=1),  # from RGB
             nn.Conv2d(16, 16, 3, padding=1),
             nn.MaxPool2d(2),  # now 64x32
@@ -31,7 +31,7 @@ class SpeedNet(nn.Module):
             nn.Conv2d(64, 64, 3, padding=1),
             nn.AdaptiveMaxPool2d((1,1)),  # global average pooling
             Flatten(),
-        ]
+        ])
         self.final = nn.Linear(64, 1)
 
     def forward(self, input: torch.Tensor):

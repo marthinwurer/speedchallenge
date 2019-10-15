@@ -2,6 +2,7 @@
 Takes the comma.ai speed challenge dataset and breaks it up into frames.
 """
 import glob
+import os
 
 import cv2
 from tqdm import tqdm
@@ -38,6 +39,7 @@ def image_generator(video):
 
 
 def extract_frames(source, dest):
+    os.makedirs(dest, exist_ok=True)
     vidcap = cv2.VideoCapture(source)
 
     width = int(vidcap.get(cv2.CAP_PROP_FRAME_WIDTH))   # float

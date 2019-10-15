@@ -22,19 +22,18 @@ class Tests(unittest.TestCase):
         sample = dataset[1234]
         pprint(sample)
 
-
     def test_load_splits(self):
         dataset = get_speed_dataset()
 
         sample = dataset[12345]
         pprint(sample)
 
-
     def test_load_selected(self):
         dataset = get_selected_datasets([0,1,2,3])
 
         sample = dataset[12345]
         pprint(sample)
+
 
 if __name__ == '__main__':
     unittest.main()
