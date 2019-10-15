@@ -113,12 +113,17 @@ class SplitSet(Dataset):
 
 
 def get_speed_dataset(stacks=4):
+    return get_selected_datasets(range(5), stacks)
+
+
+def get_selected_datasets(split_ids, stacks=4):
     sets = []
-    for i in range(5):
+    for i in split_ids:
         dataset = SpeedSplit("./data", i, stacks)
         sets.append(dataset)
 
     return SplitSet(sets)
+
 
 
 

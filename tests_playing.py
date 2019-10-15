@@ -3,7 +3,7 @@ import unittest
 import glob
 from pprint import pprint
 
-from load_dataset import load_speeds, get_speed_dataset, SpeedSplit
+from load_dataset import load_speeds, get_speed_dataset, SpeedSplit, get_selected_datasets
 from build_dataset import build_splits, split_train
 
 
@@ -23,13 +23,18 @@ class Tests(unittest.TestCase):
         pprint(sample)
 
 
-
     def test_load_splits(self):
         dataset = get_speed_dataset()
 
         sample = dataset[12345]
         pprint(sample)
 
+
+    def test_load_selected(self):
+        dataset = get_selected_datasets([0,1,2,3])
+
+        sample = dataset[12345]
+        pprint(sample)
 
 if __name__ == '__main__':
     unittest.main()
