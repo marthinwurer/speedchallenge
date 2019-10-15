@@ -1,4 +1,3 @@
-import random
 import numpy as np
 
 from PIL import Image
@@ -47,10 +46,3 @@ class SpeedDataset(Dataset):
 def load_speeds(speed_file):
     with open(speed_file, 'r') as f:
         return [float(speed) for speed in f]
-
-
-
-
-
-
-
