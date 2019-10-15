@@ -19,8 +19,7 @@ def build_splits(items, splits, split_name):
         rest = rest[per_split:]
 
         with open("./data/split%s_%s.txt" % (i, split_name), "w") as f:
-            for item in split:
-                print(item, file=f)
+            f.write("\n".join([str(item) for item in split]))
 
 
 def split_train(image_dir, label_file, splits=5):
