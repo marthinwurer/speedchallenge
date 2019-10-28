@@ -1,7 +1,18 @@
 import numpy as np
+import torch
 
 from PIL import Image
 from torch.utils.data import Dataset
+
+
+def transform_images(frames):
+    # generate values for transformations
+    # apply transformations
+    outframes = []
+    for frame in frames:
+        # apply transformations
+        outframes.append(frame)
+    return outframes
 
 
 class SpeedDataset(Dataset):
@@ -37,7 +48,7 @@ class SpeedDataset(Dataset):
 
         # stack frames and speeds, then return them both
         speeds = np.asarray(speeds)
-        frames = np.stack(frames)
+        # frames = np.stack(frames)
         frame_nums = np.asarray(frame_nums)
 
         return frames, speeds, frame_nums
@@ -87,7 +98,7 @@ class SpeedSplit(Dataset):
 
         # stack frames and speeds, then return them both
         speeds = np.asarray(speeds)
-        frames = np.concatenate(frames)
+        # frames = np.concatenate(frames)
         frame_nums = np.asarray(frame_nums)
 
         return frames, speeds, frame_nums
@@ -125,5 +136,18 @@ def get_selected_datasets(split_ids, stacks=4):
     return SplitSet(sets)
 
 
+def iter_net_transform(dataset_loader, device, transform=transform_images):
+    for images, labels, frames in dataset_loader:
+        images = transform(images)
+        images = torch.cat(images, 1)
+
+        images = images.to(device, dtype=torch.float)
+        labels = labels[:, -1]
+        labels = labels.to(device, dtype=torch.float)
+
+        # preprocess image into 0..1
+        images = images / 255.0 - .5
+
+        yield images, labels, frames
 
 

@@ -50,7 +50,7 @@ def extract_frames(source, dest):
 
     for count, frame in enumerate(tqdm(image_generator(vidcap))):
         # clip image
-        frame = frame[32:(32+320),:]
+        frame = frame[32:(32+320), :]
         frame = cv2.resize(frame, (128, 64), interpolation=cv2.INTER_AREA)  # use the inter_area to get better images
         cv2.imwrite(dest + "/frame%05d.png" % count, frame)
 
